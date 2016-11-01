@@ -1,0 +1,17 @@
+{
+  "name": "bot-hello-world",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "botbuilder": "^3.3.3",
+    "googleapis": "^14.1.0",
+    "request": "^2.76.0",
+    "restify": "^4.1.1"
+  }
+}
