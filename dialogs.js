@@ -5,6 +5,7 @@ module.exports = function(bot, builder) {
         var msg = "Hmm... Nope. I'm afraid I didn't quite get that!"
                 + " I'm still quite new to all this human stuff."
         session.send(msg);
+        session.endDialog();
     });
 
     bot.dialog("/greeting", [function(session, args, next) {
@@ -38,6 +39,8 @@ module.exports = function(bot, builder) {
             } else {
                 session.send("Huh, okay well I can't do much now I'm afraid.");
             }
+
+            session.endDialog(); // I think this is correct?
         }
     ]);
 
@@ -76,5 +79,11 @@ module.exports = function(bot, builder) {
         session.send("Okay, I'll clear your profile now!");
         session.privateConversationData = {};
         session.send("Looks like we're done!");
+        session.endConversation();
+    });
+
+    bot.dialog("/default", function(session) {
+        session.send("Default");
+        session.endDialog();
     });
 }

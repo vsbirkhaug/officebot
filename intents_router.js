@@ -1,9 +1,11 @@
-module.exports = function(bot, intents) {
-    intents.matches("general.greeting", "/greeting");
-    intents.match("profile.clear", "/clear_profile");
-    intents.matches("None", "/not_sure");
+module.exports = function(bot, intent) {
+    intent.matches("general.greeting", "/greeting");
+    intent.matches("profile.clear", "/clear_profile");
+    intent.matches("None", "/not_sure");
 
-    intents.onDefault("/not_sure");
+    //intent.onDefault("/not_sure");
+    //intent.onDefault("/clear_profile");
+    intent.onDefault("/default");
 
-    bot.dialog("/", intents);
+    bot.dialog("/", intent);
 }
