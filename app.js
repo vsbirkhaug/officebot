@@ -12,7 +12,7 @@ let bot = new builder.UniversalBot(connector);
 let server = restify.createServer();
 server.use(restify.queryParser());
 // Initialise web routes
-require('./http_routes.js')(server, bot);
+require('./web_server/router.js')(server, bot);
 server.post('/api/messages', connector.listen());
 
 /*
@@ -24,8 +24,8 @@ server.post('/api/messages', connector.listen());
 let model = process.env.LUIS_MODEL;
 let recognizer = new builder.LuisRecognizer(model);
 let intent = new builder.IntentDialog({recognizers: [recognizer]});
-require('./intents_router.js')(bot, intent);
-require('./dialogs.js')(bot, builder);
+require('./bot/router.js')(bot, intent);
+require('./bot/dialogs.js')(bot, builder);
 
 // Set the http server to listen
 server.listen(80, function() {
