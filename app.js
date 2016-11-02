@@ -15,15 +15,12 @@ server.use(restify.queryParser());
 require('./web_server/router.js')(server, bot);
 server.post('/api/messages', connector.listen());
 
-/*
- * Set up bot and dialogs
- * */
-// Create a new universal bot connected to the BotConnector
-
 // Add LUIS as an intent model
 let model = process.env.LUIS_MODEL;
 let recognizer = new builder.LuisRecognizer(model);
 let intent = new builder.IntentDialog({recognizers: [recognizer]});
+
+// Initialise dialogs and intention router
 require('./bot/router.js')(bot, intent);
 require('./bot/dialogs.js')(bot, builder);
 
