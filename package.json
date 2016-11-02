@@ -4,14 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "./node_modules/eslint/bin/eslint.js ."
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "botbuilder": "^3.3.3",
+    "eslint": "^3.9.1",
     "googleapis": "^14.1.0",
     "request": "^2.76.0",
     "restify": "^4.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.9.1",
+    "eslint-config-google": "^0.7.0"
   }
 }

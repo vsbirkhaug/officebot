@@ -1,0 +1,10 @@
+{
+    "extends": "google",
+    "installedESLint": true,
+    "env": {
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 6
+    }
+}
