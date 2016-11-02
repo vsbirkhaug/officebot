@@ -81,9 +81,4 @@ module.exports = function(bot, builder) {
         session.send("Looks like we're done!");
         session.endConversation();
     });
-
-    bot.dialog("/default", function(session) {
-        session.send("Default");
-        session.endDialog();
-    });
 }
