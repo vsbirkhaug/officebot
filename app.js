@@ -11,6 +11,7 @@ let bot = new builder.UniversalBot(connector);
 // Create restify server
 let server = restify.createServer();
 server.use(restify.queryParser());
+
 // Initialise web routes
 require('./web_server/router.js')(server, bot);
 server.post('/api/messages', connector.listen());
