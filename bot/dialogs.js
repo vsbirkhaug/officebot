@@ -1,4 +1,5 @@
 let request = require('request');
+let MarkdownFormatter = require('./markdown_formatter.js');
 
 module.exports = function(bot, builder) {
     bot.dialog('/not_sure', function(session) {
@@ -21,6 +22,13 @@ module.exports = function(bot, builder) {
         }
     }]);
 
+    bot.dialog('/how_to_use', function(session) {
+        let msg = 'Hey, well I\'m here to help with any office needs'
+            + ' so just ask me to do something and I\'ll do my best!';
+
+        session.send(msg);
+    });
+
     bot.dialog('/profile', [
         function(session) {
             let msg = 'Can I ask you to login with github?';
@@ -33,7 +41,7 @@ module.exports = function(bot, builder) {
                 let address = session.message.address;
                 let url = 'https://github.com/login/oauth/authorize'
                     + '?client_id=' + process.env.GH_CLIENT_ID
-                    + '&scope=user:email'
+                    + '&scope=user%20repo'
                     + '&redirect_uri=' + process.env.GH_AUTH_REDIRECT
                     + '&state='
                     + encodeURIComponent(JSON.stringify(address));
@@ -91,6 +99,60 @@ module.exports = function(bot, builder) {
             });
         },
     ]);
+
+    bot.dialog('/github_my_issues', function(session) {
+        if (!session.privateConversationData.ghToken) {
+            session.send('Oh hold on, we need to authenticate you first.');
+            session.replaceDialog('/profile');
+        }
+        session.send('Sure thing, just a mo');
+
+        let token = session.privateConversationData.ghToken;
+        request.get({
+            url: 'https://api.github.com/user/issues',
+            headers: {
+                'User-Agent': 'OfficeBot',
+                'Accept': 'application/vnd.github.v3+json',
+                'Authorization': 'token ' + token,
+            },
+        },
+        function(err, res, body) {
+            console.log('Got response');
+            let issues = JSON.parse(body);
+
+            // Title
+            let msgText = '**Here are the issues assigned to you:**\n\n';
+
+            // List
+            for (let i = 0; i < issues.length; i++) {
+                // Only show the first 9
+                if (i == 9) {
+                    msgText += 'There are a few more after that!';
+                    break;
+                }
+
+                // Repo name link
+                let repoUrl = issues[i].repository.html_url;
+                let repoName = issues[i].repository.owner.login
+                    + '/'
+                    + issues[i].repository.name;
+                msgText += MarkdownFormatter.link(repoName, repoUrl);
+                msgText += ' - ';
+                // Issue name link
+                let issueUrl = issues[i].html_url;
+                let issueTitle = issues[i].title;
+                msgText += MarkdownFormatter.link(issueTitle, issueUrl);
+                msgText += '\n\n';
+            }
+
+            let mdMessage = new builder.Message(session)
+                .textFormat(builder.TextFormat.markdown)
+                .text(msgText);
+
+            session.send(mdMessage);
+            session.endDialog();
+        });
+    });
 
     bot.dialog('/clear_profile', function(session) {
         session.send('Okay, I\'ll clear your profile now!');
