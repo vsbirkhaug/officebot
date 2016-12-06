@@ -1,24 +1,46 @@
 let MarkdownFormatter = require('../markdown_formatter');
 let builder = require('botbuilder');
-let utils = require('../utilities');
 let githubApi = require('../../github-api');
 
-
-let github = {
-
-    indexIssues: function(session, args) {
+let indexIssues = [
+    function(session, args, next) {
         console.log('github.indexIssues');
 
-        // Alert the user that something is happening
-        session.send('I\'ll just take a look for you');
-        session.sendBatch(); // Send right now
-
         // Get and format the repo name
-        let repo = utils.extractEntity('repo', args);
-        repo = repo.replace(' / ', '/');
+        let repo = builder.EntityRecognizer.findEntity(args.entities, 'github.repo.name');
+        let req = session.dialogData.req = {
+            repo: repo ? repo.entity : null
+        };
 
-        // Get the issues async
-        githubApi.indexIssues(repo).then(function(issues) {
+        if (!req.repo) {
+            builder.Prompts.text(session, 'What repo shall I use?');
+        } else {
+            next();
+        }
+    },
+    function(session, result, next) {
+        console.log(result);
+        if (result.resumed === 'cancelled'
+            || result.resumed === 'back'
+            || result.resumed === 'notCompleted') {
+            // User said cancel
+            session.send('Okay');
+            return session.endDialog();
+        }
+
+        return session.endDialog();
+
+        let req = session.dialogData.req;
+        if (result.response) {
+            req.repo = result.response;
+        }
+        
+        console.log('repo: ', req.repo);
+        // LUIS adds spaces around the slash
+        req.repo = req.repo.replace(' / ', '/');
+
+        // Get the issues
+        githubApi.indexIssues(req.repo).then(function(issues) {
 
             // Format the message
             let msg = '';
@@ -39,38 +61,41 @@ let github = {
             session.send(msg);
         }).catch(function(err) {
             console.error(err);
-            session.send('Oh sorry I seem to be a bit broken, can you try again later?');
+            session.send('Oh no, something went wrong! Try again in a bit.');
         }).finally(function() {
             session.endDialog();
         });
-    },
-
-    getIssue: function(session) {
-        let token = process.env.GH_TOKEN;
-        let repo = process.env.GH_REPO;
-        let issueId = 4;
-        // /repos/:owner/:repo/issues/:number
-        let url = 'https://api.github.com/repos/' + repo + '/issues/' + issueId;
-        
-        request.get(
-            {
-                url: url,
-                headers: {
-                    'User-Agent': 'OfficeBot',
-                    'Accept': 'application/vnd.github.v3+json',
-                    'Authorization': 'token ' + token,
-                },
-            },
-            function(err, res, body) {
-                let issue = JSON.parse(body);
-
-                let msg = issue.title + '/n/n';
-                msg += issue.url;
-
-                session.endDialog(msg);
-            }
-        );
     }
+];
+
+let getIssue = function(session) {
+    let token = process.env.GH_TOKEN;
+    let repo = process.env.GH_REPO;
+    let issueId = 4;
+    // /repos/:owner/:repo/issues/:number
+    let url = 'https://api.github.com/repos/' + repo + '/issues/' + issueId;
+    
+    request.get(
+        {
+            url: url,
+            headers: {
+                'User-Agent': 'OfficeBot',
+                'Accept': 'application/vnd.github.v3+json',
+                'Authorization': 'token ' + token,
+            },
+        },
+        function(err, res, body) {
+            let issue = JSON.parse(body);
+
+            let msg = issue.title + '/n/n';
+            msg += issue.url;
+
+            session.endDialog(msg);
+        }
+    );
 };
 
-module.exports = github;
+module.exports = {
+    indexIssues: indexIssues,
+    getIssue: getIssue
+};
