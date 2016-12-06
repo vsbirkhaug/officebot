@@ -7,7 +7,8 @@ module.exports = function(bot, intent) {
 
     intent.matches('profile.clear', '/clear_profile');
 
-    intent.matches('github.my.issues', '/github_my_issues');
+    intent.matches('github.repo.issues.index', '/github_repo_issues_index');
+    //intent.matches('github.repo.issues.show', '/github_repo_issues_show');
 
     intent.matches('None', '/not_sure');
     intent.onDefault('/not_sure');

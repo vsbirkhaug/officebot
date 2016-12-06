@@ -10,7 +10,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "botbuilder": "^3.3.3",
+    "bluebird": "^3.4.6",
+    "botbuilder": "~>3.4.4",
     "eslint": "^3.9.1",
     "googleapis": "^14.1.0",
     "request": "^2.76.0",

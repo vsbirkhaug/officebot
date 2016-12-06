@@ -21,9 +21,9 @@ let model = process.env.LUIS_MODEL;
 let recognizer = new builder.LuisRecognizer(model);
 let intent = new builder.IntentDialog({recognizers: [recognizer]});
 
-// Initialise dialogs and intention router
-require('./bot/router.js')(bot, intent);
-require('./bot/dialogs.js')(bot, builder);
+// Initialise bot application
+let botApp = require('./bot');
+botApp.init(bot, intent);
 
 // Set the http server to listen
 server.listen(80, function() {
