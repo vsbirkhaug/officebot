@@ -109,7 +109,7 @@ let getIssue = [
         if (req.repo && req.issueId) {
             req.repo = req.repo.replace(' / ', '/');
 
-            session.send('Let me grab that for you!');
+            session.send('I\'ll see what I can find, hold on');
             session.sendBatch();
 
             githubApi.showIssue(req.repo, req.issueId).then(function(issue) {
@@ -119,8 +119,11 @@ let getIssue = [
 
                 session.send(msg);
             }).catch(function(err) {
-                console.log('error');
-                session.send('Well this is embarrassing, looks I broke a bit');
+                if (err.statusCode && err.statusCode === 404) {
+                    session.send('I can\'t seem to find that issue');
+                } else {
+                    session.send('Well this is embarrassing, looks I broke a bit');
+                }
             }).finally(function() {
                 session.endDialog();
             });

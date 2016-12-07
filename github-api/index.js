@@ -57,7 +57,15 @@ let showIssue = function showIssue(repoName, issueId) {
 
     return new Promise(function (resolve, reject) {
         request.get(req, function(err, res, body) {
-            if (err) { reject(err); }
+            if (err) {
+                return reject(err);
+            }
+
+            if (res.statusCode === 404) {
+                let notFound = new Error('Issue not found');
+                notFound.statusCode = res.statusCode;
+                return reject(notFound);
+            }
 
             let rawIssue = JSON.parse(body);
 
