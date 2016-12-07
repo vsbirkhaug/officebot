@@ -1,12 +1,13 @@
 let general = {
-    notSure: function(session) {
+    notSure: function(session, args) {
         console.log('general.notSure');
+        console.log(args);
         let msg = 'Hmm... Nope. I\'m afraid I didn\'t quite get that!'
                 + ' I\'m still quite new to all this human stuff.';
         session.endDialog(msg);
     },
 
-    greeting: function(session, args, next) {
+    greeting: function(session) {
         console.log('general.greeting');
         let msg = 'Hey there!';
         session.endDialog(msg);
