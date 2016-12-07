@@ -40,8 +40,6 @@ let indexIssues = function indexIssues(repoName) {
 
 let showIssue = function showIssue(repoName, issueId) {
     console.log('github-api.showIssue');
-    
-    console.log(repoName, issueId);
 
     let url = baseUri + 'repos/' + repoName + '/issues/' + issueId;
     let token = process.env.GH_TOKEN;
