@@ -14,4 +14,5 @@ module.exports = function(bot) {
     // GitHub
     bot.dialog('/github_repo_issues_index', github.indexIssues);
     bot.dialog('/github_repo_issues_show', github.getIssue);
+    bot.dialog('/github_repo_issues_create', github.createIssue);
 };

@@ -9,6 +9,7 @@ module.exports = function(bot, intent) {
 
     intent.matches('github.repo.issues.index', '/github_repo_issues_index');
     intent.matches('github.repo.issues.show', '/github_repo_issues_show');
+    intent.matches('github.repo.issues.create', '/github_repo_issues_create');
 
     intent.matches('None', '/not_sure');
     intent.onDefault('/not_sure');

@@ -2,6 +2,16 @@ let MarkdownFormatter = require('../markdown_formatter');
 let builder = require('botbuilder');
 let githubApi = require('../../github-api');
 
+function formatIssueForUser(issue) {
+    return '[#' + issue.id + '] ' + issue.title
+            + '\n\n'
+            + issue.url;
+}
+
+function sendIssue(session, issue) {
+    session.send(formatIssueForUser(issue));
+}
+
 let indexIssues = [
     function(session, args, next) {
         console.log('github.indexIssues');
@@ -33,7 +43,6 @@ let indexIssues = [
             return session.endDialog();
         }
         
-        console.log('repo: ', req.repo);
         // LUIS adds spaces around the slash
         req.repo = req.repo.replace(' / ', '/');
 
@@ -43,16 +52,14 @@ let indexIssues = [
             // Format the message
             let msg = '';
 
+            // Just get the top 5, we don't want to spam
             if (issues.length > 5) {
                 msg += 'There are quite a few so here are the top 5 \n\n';
                 issues = issues.slice(0, 4);
             }
 
             issues.forEach(function(i) {
-                msg += '[#' + i.id + '] ';
-                msg += i.title + '\n\n';
-                msg += i.url;
-                msg += ' \n\n';
+                msg += formatIssueForUser(i) + '\n\n';
             });
 
             // Send the message
@@ -68,6 +75,7 @@ let indexIssues = [
 
 let getIssue = [
     function(session, args, next) {
+        console.log('github.getIssue');
         let repo = builder.EntityRecognizer.findEntity(args.entities, 'github.repo.name');
         let issueId = builder.EntityRecognizer.findEntity(args.entities, 'github.issue.id');
 
@@ -113,11 +121,8 @@ let getIssue = [
             session.sendBatch();
 
             githubApi.showIssue(req.repo, req.issueId).then(function(issue) {
-                let msg = '[#' + issue.id + '] ' + issue.title;
-                msg += '\n\n';
-                msg += issue.url;
-
-                session.send(msg);
+                // Send the issue back to the user
+                sendIssue(session, issue);
             }).catch(function(err) {
                 if (err.statusCode && err.statusCode === 404) {
                     session.send('I can\'t seem to find that issue');
@@ -133,7 +138,72 @@ let getIssue = [
     }
 ];
 
+let createIssue = [
+    function(session, args, next) { // ask for repo
+        console.log('github.createIssue');
+
+        let repo = builder.EntityRecognizer.findEntity(args.entities, 'github.repo.name');
+        let issueName = builder.EntityRecognizer.findEntity(args.entities, 'github.issue.name');
+
+        let req = session.dialogData.req = {
+            repo: repo ? repo.entity : null,
+            issueName: issueName ? issueName.entity : null
+        };
+
+        // Prompt for repo
+        if (!req.repo) {
+            builder.Prompts.text(session, 'What repo is the issue for?');
+        } else {
+            next();
+        }
+    },
+    function(session, results, next) { // ask for issue name
+        let req = session.dialogData.req;
+        if (results.response) {
+            req.repo = results.response;
+        }
+        session.dialogData.req = req; // do we need this?
+
+        // repo will be null if the user has cancelled
+        // at least it should be but Microsoft...
+        if (req.repo && !req.issueName) {
+            builder.Prompts.text(session, 'What shall I call the issue?');
+        } else {
+            next();
+        }
+    },
+    function(session, results) { // create it
+        let req = session.dialogData.req;
+        if (results.response) {
+            req.issueName = results.response;
+        }
+
+        req.repo = req.repo.replace(' / ', '/');
+
+        // If either are null, the user has cancelled
+        if (req.repo && req.issueName) {
+            // Make the API call
+            githubApi.createIssue(req.repo, req.issueName).then(function(issue) {
+                // Send the created issue back to the user
+                sendIssue(session, issue);
+            }).catch(function(err) {
+                if (err.statusCode && err.statusCode === 404) {
+                    session.send('Are you sure that repo exists, perhaps it\'s private?');
+                } else {
+                    session.send('I done gone messed up, probably best to try later.');
+                }
+            }).finally(function() {
+                // Make sure to close the dialog
+                session.endDialog();
+            })
+        } else {
+            session.endDialog('Oh okay, sure');
+        }
+    }
+]
+
 module.exports = {
     indexIssues: indexIssues,
-    getIssue: getIssue
+    getIssue: getIssue,
+    createIssue: createIssue
 };
