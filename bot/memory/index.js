@@ -5,12 +5,32 @@ Promise.promisifyAll(redis.Multi.prototype);
 
 let client = redis.createClient();
 
-let store = function store(key, value) {
-    throw new Error('Not Implemented');
+let store = function store(key, obj) {
+    let objValue = JSON.stringify(obj);
+
+    return new Promise(function(resolve, reject) {
+        client.setAsync(key, objValue).then(function() {
+            resolve();
+        }).catch(function(err) {
+            console.log('err storing');
+            reject(err);
+        })
+    });
 }
 
 let get = function get(key) {
-    throw new Error('Not Implemented');
+    return new Promise(function(resolve, reject) {
+        client.getAsync(key).then(function(jsonStr) {
+            if (jsonStr) {
+                resolve(JSON.parse(jsonStr));
+            } else {
+                resolve();
+            }
+        }).catch(function(err) {
+            reject(err);
+        });
+    });
+    
 }
 
 module.exports = {

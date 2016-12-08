@@ -1,6 +1,7 @@
 let general = require('./general');
 let github = require('./github');
 let trello = require('./trello');
+let teams = require('./teams');
 
 module.exports = function(bot) {
     // General
@@ -17,4 +18,8 @@ module.exports = function(bot) {
     // Trello
     bot.dialog('/trello_next_task_view', trello.getNextCard);
     bot.dialog('/trello_next_task_claim', trello.claimNextCard);
+
+    // Team
+    bot.dialog('/teams_index', teams.index);
+    bot.dialog('/team_create', teams.create);
 };

@@ -1,6 +1,8 @@
 module.exports = function(bot, intent) {
     bot.dialog('/', intent);
 
+    //intent.matches('general.greet', '/team_create');
+
     // Intent routers
     intent.matches('general.greet', '/greeting');
     intent.matches('general.help', '/how_to_use');
@@ -12,6 +14,9 @@ module.exports = function(bot, intent) {
     intent.matches('github.repo.issues.create', '/github_repo_issues_create');
 
     intent.matches('trello.board.next', '/trello_next_task_view');
+
+    intent.matches('teams.index', '/teams_index');
+    intent.matches('teams.create', '/team_create');
 
     // Don't handle the 'None' intent, it's not adviced. Instead
     // drop through to default.
