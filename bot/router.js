@@ -1,4 +1,11 @@
-module.exports = function(bot, intent) {
+let builder = require('botbuilder');
+
+let init = function init(bot, intent) {
+    // Middleware
+    bot.use(builder.Middleware.dialogVersion({version: 0.1, resetCommand: /^halt/i }));
+    bot.use(builder.Middleware.sendTyping());
+
+
     bot.dialog('/', intent);
 
     //intent.matches('general.greet', '/team_create');
@@ -23,3 +30,5 @@ module.exports = function(bot, intent) {
     //intent.matches('None', '/not_sure');
     intent.onDefault('/not_sure');
 };
+
+module.exports.init = init;

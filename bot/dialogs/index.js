@@ -3,7 +3,7 @@ let github = require('./github');
 let trello = require('./trello');
 let teams = require('./teams');
 
-module.exports = function(bot) {
+let init = function init(bot) {
     // General
     bot.dialog('/not_sure', general.notSure);
     bot.dialog('/greeting', general.greeting);
@@ -23,3 +23,5 @@ module.exports = function(bot) {
     bot.dialog('/teams_index', teams.index);
     bot.dialog('/team_create', teams.create);
 };
+
+module.exports.init = init;

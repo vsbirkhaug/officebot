@@ -13,10 +13,10 @@
     "bluebird": "^3.4.6",
     "botbuilder": "~>3.4.4",
     "eslint": "^3.9.1",
+    "express": "^4.14.0",
     "googleapis": "^14.1.0",
     "redis": "^2.6.3",
     "request": "^2.76.0",
-    "restify": "^4.1.1",
     "url-assembler": "^1.2.4"
   },
   "devDependencies": {
