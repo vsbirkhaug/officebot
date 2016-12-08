@@ -2,6 +2,20 @@ let MarkdownFormatter = require('../markdown_formatter');
 let builder = require('botbuilder');
 let githubApi = require('../../github-api');
 
+let allowedRepos = [
+    'bluehatbrit/officebot',
+];
+
+function restrictRepoAccess(session) {
+    let msg = 'During the demo it\'s probably safer if I only let you use the ';
+    msg += '**' + allowedRepos[0] + '**';
+    msg += ' repo. I mean, I don\'t really know you... do I.'
+    msg += '\n\n';
+    msg += 'So go nuts, but only with ' + '**' + allowedRepos[0] + '**!';
+    
+    session.endDialog(msg);
+}
+
 function formatIssueForUser(issue) {
     return '[#' + issue.id + '] ' + issue.title
             + '\n\n'
@@ -179,6 +193,11 @@ let createIssue = [
         }
 
         req.repo = req.repo.replace(' / ', '/');
+
+        // Restrict demo access!
+        if (req.repo !== allowedRepos) {
+            return restrictRepoAccess(session);
+        }
 
         // If either are null, the user has cancelled
         if (req.repo && req.issueName) {
