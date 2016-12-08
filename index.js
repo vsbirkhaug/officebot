@@ -1,6 +1,10 @@
 let express = require('express');
 let botConnector = require('./bot');
+let webServer = require('./web-server');
 let server = express();
+
+// Mount the web app
+server.use(webServer());
 
 // Mount the bot on the server
 server.post('/api/messages', botConnector.listen());

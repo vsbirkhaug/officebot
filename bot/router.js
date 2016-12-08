@@ -5,14 +5,12 @@ let init = function init(bot, intent) {
     bot.use(builder.Middleware.dialogVersion({version: 0.1, resetCommand: /^halt/i }));
     bot.use(builder.Middleware.sendTyping());
 
-
     bot.dialog('/', intent);
-
-    //intent.matches('general.greet', '/team_create');
 
     // Intent routers
     intent.matches('general.greet', '/greeting');
     intent.matches('general.help', '/how_to_use');
+    intent.matches('general.thanks', '/thanks');
 
     intent.matches('profile.clear', '/clear_profile');
 

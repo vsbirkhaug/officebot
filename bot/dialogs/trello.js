@@ -1,4 +1,4 @@
-let trelloApi = require('../../trello-api');
+let trelloApi = require('../externals/trello-api');
 let builder = require('botbuilder');
 
 let getNextCard = function(session, args, next) {

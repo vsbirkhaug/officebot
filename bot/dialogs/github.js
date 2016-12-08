@@ -1,6 +1,6 @@
 let MarkdownFormatter = require('../markdown_formatter');
 let builder = require('botbuilder');
-let githubApi = require('../../github-api');
+let githubApi = require('../externals/github-api');
 
 let allowedRepos = [
     'bluehatbrit/officebot',

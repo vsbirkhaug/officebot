@@ -8,6 +8,7 @@ let init = function init(bot) {
     bot.dialog('/not_sure', general.notSure);
     bot.dialog('/greeting', general.greeting);
     bot.dialog('/how_to_use', general.help);
+    bot.dialog('/thanks', general.thanks);
     bot.dialog('/clear_profile', general.clearProfile);
 
     // GitHub

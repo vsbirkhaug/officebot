@@ -53,6 +53,10 @@ let general = {
         session.endDialog();
     },
 
+    thanks: function(session) {
+        session.endDialog("You're welcome!");
+    },
+
     clearProfile: function(session) {
         console.log('general.clearProfile');
         session.send('Okay, I\'ll clear your profile now!');
