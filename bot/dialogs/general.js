@@ -9,6 +9,7 @@ let general = {
 
     greeting: function(session) {
         console.log('general.greeting');
+        console.log(session.message.address);
         let msg = 'Hey there!';
         session.endDialog(msg);
     },

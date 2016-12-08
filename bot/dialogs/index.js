@@ -1,5 +1,6 @@
 let general = require('./general');
 let github = require('./github');
+let trello = require('./trello');
 
 module.exports = function(bot) {
     // General
@@ -8,11 +9,12 @@ module.exports = function(bot) {
     bot.dialog('/how_to_use', general.help);
     bot.dialog('/clear_profile', general.clearProfile);
 
-    // bot.dialog('/profile', github.profile);
-    // bot.dialog('/oauth-success', github.oAuth);
-
     // GitHub
     bot.dialog('/github_repo_issues_index', github.indexIssues);
     bot.dialog('/github_repo_issues_show', github.getIssue);
     bot.dialog('/github_repo_issues_create', github.createIssue);
+
+    // Trello
+    bot.dialog('/trello_next_task_view', trello.getNextCard);
+    bot.dialog('/trello_next_task_claim', trello.claimNextCard);
 };
