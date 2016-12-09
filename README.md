@@ -32,3 +32,4 @@ The bot has a few prebuild tasks which can be used for todays demo, but of cours
 * The trello integration uses [this demo board here](https://trello.com/b/viHXwBnd/vintus)
 * Creating issues can only be done on `bluehatbrit/officebot` during the demo.
 * Team management is still in development.
+* If something goes drastically wrong just type say "halt" and it'll reset.
