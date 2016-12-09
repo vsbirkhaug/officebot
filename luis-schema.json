@@ -1,0 +1,1074 @@
+{
+  "luis_schema_version": "1.3.0",
+  "name": "OfficeBot",
+  "desc": "Your personal office robot",
+  "culture": "en-us",
+  "intents": [
+    {
+      "name": "general.greet"
+    },
+    {
+      "name": "general.help"
+    },
+    {
+      "name": "general.thanks"
+    },
+    {
+      "name": "github.repo.issues.create"
+    },
+    {
+      "name": "github.repo.issues.index"
+    },
+    {
+      "name": "github.repo.issues.show"
+    },
+    {
+      "name": "None"
+    },
+    {
+      "name": "profile.clear"
+    },
+    {
+      "name": "teams.create"
+    },
+    {
+      "name": "teams.index"
+    },
+    {
+      "name": "trello.board.next"
+    }
+  ],
+  "entities": [
+    {
+      "name": "github.issue.id"
+    },
+    {
+      "name": "github.issue.name"
+    },
+    {
+      "name": "github.repo.name"
+    },
+    {
+      "name": "team.name"
+    }
+  ],
+  "composites": [],
+  "closedLists": [],
+  "bing_entities": [],
+  "actions": [],
+  "model_features": [],
+  "regex_features": [],
+  "utterances": [
+    {
+      "text": "ola",
+      "intent": "general.greet",
+      "entities": []
+    },
+    {
+      "text": "hey there",
+      "intent": "general.greet",
+      "entities": []
+    },
+    {
+      "text": "what's up?",
+      "intent": "general.greet",
+      "entities": []
+    },
+    {
+      "text": "hello world",
+      "intent": "general.greet",
+      "entities": []
+    },
+    {
+      "text": "fuck",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "ben",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "hello",
+      "intent": "general.greet",
+      "entities": []
+    },
+    {
+      "text": "iojegriojergiojergijoreg",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "helllllloooooo",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "what you doin?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "wergergergrge",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "hi",
+      "intent": "general.greet",
+      "entities": []
+    },
+    {
+      "text": "lol",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "hey",
+      "intent": "general.greet",
+      "entities": []
+    },
+    {
+      "text": "clear my profile",
+      "intent": "profile.clear",
+      "entities": []
+    },
+    {
+      "text": "forget me",
+      "intent": "profile.clear",
+      "entities": []
+    },
+    {
+      "text": "ditch my profile",
+      "intent": "profile.clear",
+      "entities": []
+    },
+    {
+      "text": "profile clear",
+      "intent": "profile.clear",
+      "entities": []
+    },
+    {
+      "text": "erase profile",
+      "intent": "profile.clear",
+      "entities": []
+    },
+    {
+      "text": "erase my profile",
+      "intent": "profile.clear",
+      "entities": []
+    },
+    {
+      "text": "get rid of my profile",
+      "intent": "profile.clear",
+      "entities": []
+    },
+    {
+      "text": "clear profile",
+      "intent": "profile.clear",
+      "entities": []
+    },
+    {
+      "text": "clear my profile please",
+      "intent": "profile.clear",
+      "entities": []
+    },
+    {
+      "text": "clear my profile mate",
+      "intent": "profile.clear",
+      "entities": []
+    },
+    {
+      "text": "iuehgeiojgrirejogejirgwijewrpgiwpjergijowegr",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "show me my github issues",
+      "intent": "github.repo.issues.index",
+      "entities": []
+    },
+    {
+      "text": "what do i do?",
+      "intent": "general.help",
+      "entities": []
+    },
+    {
+      "text": "how do i use you?",
+      "intent": "general.help",
+      "entities": []
+    },
+    {
+      "text": "help",
+      "intent": "general.help",
+      "entities": []
+    },
+    {
+      "text": "how do i use this?",
+      "intent": "general.help",
+      "entities": []
+    },
+    {
+      "text": "what issues are on bluehatbrit/officebot?",
+      "intent": "github.repo.issues.index",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "what are the bluehatbrit/officebot issues?",
+      "intent": "github.repo.issues.index",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 3,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "what are the top issues on bluehatbrit/vatcode-validator?",
+      "intent": "github.repo.issues.index",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 6,
+          "endPos": 10
+        }
+      ]
+    },
+    {
+      "text": "issue 3 on bluehatbrit/officebot",
+      "intent": "github.repo.issues.show",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 3,
+          "endPos": 5
+        },
+        {
+          "entity": "github.issue.id",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "show me issue 20 on lybrary/lybrary",
+      "intent": "github.repo.issues.show",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 5,
+          "endPos": 7
+        },
+        {
+          "entity": "github.issue.id",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "create an issue on microsoft/botbuilder called intents not recognised",
+      "intent": "github.repo.issues.create",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 4,
+          "endPos": 6
+        },
+        {
+          "entity": "github.issue.name",
+          "startPos": 8,
+          "endPos": 10
+        }
+      ]
+    },
+    {
+      "text": "add unable to create account as an issue to lybrary/lybrary",
+      "intent": "github.repo.issues.create",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 9,
+          "endPos": 11
+        },
+        {
+          "entity": "github.issue.name",
+          "startPos": 1,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "new issue of unhandled exception on db connect to tryghost/ghost",
+      "intent": "github.repo.issues.create",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 9,
+          "endPos": 11
+        },
+        {
+          "entity": "github.issue.name",
+          "startPos": 3,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "make an issue on lybrary/lybrary about being unable to connect to the database",
+      "intent": "github.repo.issues.create",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 4,
+          "endPos": 6
+        },
+        {
+          "entity": "github.issue.name",
+          "startPos": 9,
+          "endPos": 14
+        }
+      ]
+    },
+    {
+      "text": "what are the top issues for github/hubot?",
+      "intent": "github.repo.issues.index",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 6,
+          "endPos": 8
+        }
+      ]
+    },
+    {
+      "text": "what issues are on angular/angular?",
+      "intent": "github.repo.issues.index",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "what issues do we have for github/scientist",
+      "intent": "github.repo.issues.index",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 6,
+          "endPos": 8
+        }
+      ]
+    },
+    {
+      "text": "issues for holman/site",
+      "intent": "github.repo.issues.index",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 2,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "show me the issues for lybrary/lybrary",
+      "intent": "github.repo.issues.index",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 5,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "issue 4933 on tryghost/ghost",
+      "intent": "github.repo.issues.show",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 3,
+          "endPos": 5
+        },
+        {
+          "entity": "github.issue.id",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "get issue 1 on evnto/vatcode-validator",
+      "intent": "github.repo.issues.show",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 4,
+          "endPos": 8
+        },
+        {
+          "entity": "github.issue.id",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "create an issue on lybrary/lybrary called update t&cs",
+      "intent": "github.repo.issues.create",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 4,
+          "endPos": 6
+        },
+        {
+          "entity": "github.issue.name",
+          "startPos": 8,
+          "endPos": 11
+        }
+      ]
+    },
+    {
+      "text": "issues on bluehatbrit/officebot",
+      "intent": "github.repo.issues.index",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 2,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "show me issues on bluehatbrit/officebot",
+      "intent": "github.repo.issues.index",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "show me issues on tryghost/ghost",
+      "intent": "github.repo.issues.index",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "create an issue on bluehatbrit/office called test",
+      "intent": "github.repo.issues.create",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 4,
+          "endPos": 6
+        },
+        {
+          "entity": "github.issue.name",
+          "startPos": 8,
+          "endPos": 8
+        }
+      ]
+    },
+    {
+      "text": "profile destroy",
+      "intent": "profile.clear",
+      "entities": []
+    },
+    {
+      "text": "what are my issues?",
+      "intent": "github.repo.issues.index",
+      "entities": []
+    },
+    {
+      "text": "what are my github issues",
+      "intent": "github.repo.issues.index",
+      "entities": []
+    },
+    {
+      "text": "show me issues on bluehatbrit / officebot",
+      "intent": "github.repo.issues.index",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "what do you do?",
+      "intent": "general.help",
+      "entities": []
+    },
+    {
+      "text": "what are the issues?",
+      "intent": "github.repo.issues.index",
+      "entities": []
+    },
+    {
+      "text": "destroy my profile",
+      "intent": "profile.clear",
+      "entities": []
+    },
+    {
+      "text": "get me issues on tryghost/ghost",
+      "intent": "github.repo.issues.index",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "show my assigned issues",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "wipe the profile",
+      "intent": "profile.clear",
+      "entities": []
+    },
+    {
+      "text": "hey how's it going?",
+      "intent": "general.greet",
+      "entities": []
+    },
+    {
+      "text": "what are the issues for officebot?",
+      "intent": "github.repo.issues.index",
+      "entities": []
+    },
+    {
+      "text": "create an issue on bluehatbrit/officebot called this is a test issue",
+      "intent": "github.repo.issues.create",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 4,
+          "endPos": 6
+        },
+        {
+          "entity": "github.issue.name",
+          "startPos": 8,
+          "endPos": 12
+        }
+      ]
+    },
+    {
+      "text": "on lybrary/lybrary make an issue named update readme with new configs",
+      "intent": "github.repo.issues.create",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 1,
+          "endPos": 3
+        },
+        {
+          "entity": "github.issue.name",
+          "startPos": 8,
+          "endPos": 12
+        }
+      ]
+    },
+    {
+      "text": "new issue on microsoft/botbuilder called exception on db connect",
+      "intent": "github.repo.issues.create",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 3,
+          "endPos": 5
+        },
+        {
+          "entity": "github.issue.name",
+          "startPos": 7,
+          "endPos": 10
+        }
+      ]
+    },
+    {
+      "text": "new issue for github/github called \"text off screen on iphone 4 for home page\"",
+      "intent": "github.repo.issues.create",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 3,
+          "endPos": 5
+        },
+        {
+          "entity": "github.issue.name",
+          "startPos": 8,
+          "endPos": 16
+        }
+      ]
+    },
+    {
+      "text": "can someone make an issue on bluehatbirt/officebot about a copy error on the help page?",
+      "intent": "github.repo.issues.create",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 6,
+          "endPos": 8
+        },
+        {
+          "entity": "github.issue.name",
+          "startPos": 10,
+          "endPos": 16
+        }
+      ]
+    },
+    {
+      "text": "show me issues",
+      "intent": "github.repo.issues.index",
+      "entities": []
+    },
+    {
+      "text": "issue 4 on tryghost/ghost",
+      "intent": "github.repo.issues.show",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 3,
+          "endPos": 5
+        },
+        {
+          "entity": "github.issue.id",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "issue 4 on bluehatbrit/officebot",
+      "intent": "github.repo.issues.show",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 3,
+          "endPos": 5
+        },
+        {
+          "entity": "github.issue.id",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "issue 4 bluehatbrit/officebot",
+      "intent": "github.repo.issues.show",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 2,
+          "endPos": 4
+        },
+        {
+          "entity": "github.issue.id",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "issue 4",
+      "intent": "github.repo.issues.show",
+      "entities": [
+        {
+          "entity": "github.issue.id",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "issue 10 on tryghost/ghost",
+      "intent": "github.repo.issues.show",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 3,
+          "endPos": 5
+        },
+        {
+          "entity": "github.issue.id",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "create an issue on bluehatbrit/officebot called a testing issue",
+      "intent": "github.repo.issues.create",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 4,
+          "endPos": 6
+        },
+        {
+          "entity": "github.issue.name",
+          "startPos": 8,
+          "endPos": 10
+        }
+      ]
+    },
+    {
+      "text": "create an issue on bluehatbrit/officebot called travis build failing",
+      "intent": "github.repo.issues.create",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 4,
+          "endPos": 6
+        },
+        {
+          "entity": "github.issue.name",
+          "startPos": 8,
+          "endPos": 10
+        }
+      ]
+    },
+    {
+      "text": "create an issue on bluehatbrit/officebot called issue with submitting projects",
+      "intent": "github.repo.issues.create",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 4,
+          "endPos": 6
+        },
+        {
+          "entity": "github.issue.name",
+          "startPos": 8,
+          "endPos": 11
+        }
+      ]
+    },
+    {
+      "text": "issue 4 microsoft/botbuilder",
+      "intent": "github.repo.issues.show",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 2,
+          "endPos": 4
+        },
+        {
+          "entity": "github.issue.id",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "issue 4 bluehatbrit/office",
+      "intent": "github.repo.issues.show",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 2,
+          "endPos": 4
+        },
+        {
+          "entity": "github.issue.id",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "create an issue on bluehatbrit/officebot called my test issue",
+      "intent": "github.repo.issues.create",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 4,
+          "endPos": 6
+        },
+        {
+          "entity": "github.issue.name",
+          "startPos": 8,
+          "endPos": 10
+        }
+      ]
+    },
+    {
+      "text": "create an issue on bluehatbrit/officebot",
+      "intent": "github.repo.issues.create",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "get issues for bluehatbrit/officebot",
+      "intent": "github.repo.issues.index",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 3,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "issue 4 bluehatbirt/office",
+      "intent": "github.repo.issues.show",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 2,
+          "endPos": 4
+        },
+        {
+          "entity": "github.issue.id",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "create an issue",
+      "intent": "github.repo.issues.create",
+      "entities": []
+    },
+    {
+      "text": "create an issue on bluehatbrit/officebot called test issue",
+      "intent": "github.repo.issues.create",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 4,
+          "endPos": 6
+        },
+        {
+          "entity": "github.issue.name",
+          "startPos": 8,
+          "endPos": 9
+        }
+      ]
+    },
+    {
+      "text": "create an issue on bluehatbrit/officebot called test issue 3",
+      "intent": "github.repo.issues.create",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 4,
+          "endPos": 6
+        },
+        {
+          "entity": "github.issue.name",
+          "startPos": 8,
+          "endPos": 10
+        }
+      ]
+    },
+    {
+      "text": "create an issue on bluehatbrit/officebot called test issue 4",
+      "intent": "github.repo.issues.create",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 4,
+          "endPos": 6
+        },
+        {
+          "entity": "github.issue.name",
+          "startPos": 8,
+          "endPos": 10
+        }
+      ]
+    },
+    {
+      "text": "create an issue called travis build failure",
+      "intent": "github.repo.issues.create",
+      "entities": [
+        {
+          "entity": "github.issue.name",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "get issues for bluehatbrit/officebot please",
+      "intent": "github.repo.issues.index",
+      "entities": [
+        {
+          "entity": "github.repo.name",
+          "startPos": 3,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "yo",
+      "intent": "general.greet",
+      "entities": []
+    },
+    {
+      "text": "what's up next?",
+      "intent": "trello.board.next",
+      "entities": []
+    },
+    {
+      "text": "what's next on trello?",
+      "intent": "trello.board.next",
+      "entities": []
+    },
+    {
+      "text": "show me the next task",
+      "intent": "trello.board.next",
+      "entities": []
+    },
+    {
+      "text": "what's the next task on trello?",
+      "intent": "trello.board.next",
+      "entities": []
+    },
+    {
+      "text": "next trello card",
+      "intent": "trello.board.next",
+      "entities": []
+    },
+    {
+      "text": "next up on trello",
+      "intent": "trello.board.next",
+      "entities": []
+    },
+    {
+      "text": "next trello item",
+      "intent": "trello.board.next",
+      "entities": []
+    },
+    {
+      "text": "create a team called ops",
+      "intent": "teams.create",
+      "entities": [
+        {
+          "entity": "team.name",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "make a new team",
+      "intent": "teams.create",
+      "entities": []
+    },
+    {
+      "text": "form new team",
+      "intent": "teams.create",
+      "entities": []
+    },
+    {
+      "text": "make me a new team",
+      "intent": "teams.create",
+      "entities": []
+    },
+    {
+      "text": "make a new team and call it qa",
+      "intent": "teams.create",
+      "entities": [
+        {
+          "entity": "team.name",
+          "startPos": 7,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "make a team called officebot development",
+      "intent": "teams.create",
+      "entities": [
+        {
+          "entity": "team.name",
+          "startPos": 4,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "new team called engineering",
+      "intent": "teams.create",
+      "entities": [
+        {
+          "entity": "team.name",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "what teams are there?",
+      "intent": "teams.index",
+      "entities": []
+    },
+    {
+      "text": "list teams",
+      "intent": "teams.index",
+      "entities": []
+    },
+    {
+      "text": "what are the teams?",
+      "intent": "teams.index",
+      "entities": []
+    },
+    {
+      "text": "thanks",
+      "intent": "general.thanks",
+      "entities": []
+    },
+    {
+      "text": "cheers",
+      "intent": "general.thanks",
+      "entities": []
+    },
+    {
+      "text": "thank you",
+      "intent": "general.thanks",
+      "entities": []
+    },
+    {
+      "text": "wonderful thanks",
+      "intent": "general.thanks",
+      "entities": []
+    },
+    {
+      "text": "you're so great",
+      "intent": "general.thanks",
+      "entities": []
+    }
+  ]
+}
