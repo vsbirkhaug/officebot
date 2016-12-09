@@ -1,7 +1,6 @@
-<center>
 # Officebot (Automation with NLP) - Technical Design Document
-**Elliot Blackburn**
-</center>
+**Team: Elliot Blackburn**
+
 ## Table of contents
 
 1. [Introduction](#introduction)
