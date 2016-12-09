@@ -11,5 +11,5 @@ server.post('/api/messages', botConnector.listen());
 
 // Set the http server to listen
 server.listen(80, function() {
-   console.log('Listening on:', 80);
+    console.log('Listening on:', 80);
 });
