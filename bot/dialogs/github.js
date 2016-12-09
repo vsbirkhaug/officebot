@@ -166,7 +166,7 @@ let createIssue = [
 
         // Prompt for repo
         if (!req.repo) {
-            builder.Prompts.text(session, 'What repo is the issue for?');
+            builder.Prompts.text(session, 'What repo is the issue for? (During this demo I can only use bluehatbrit/officebot)');
         } else {
             next();
         }
@@ -195,7 +195,8 @@ let createIssue = [
         req.repo = req.repo.replace(' / ', '/');
 
         // Restrict demo access!
-        if (req.repo !== allowedRepos) {
+        if (req.repo !== allowedRepos[0]) {
+            console.log('tried to use repo:', req.repo);
             return restrictRepoAccess(session);
         }
 
@@ -204,6 +205,7 @@ let createIssue = [
             // Make the API call
             githubApi.createIssue(req.repo, req.issueName).then(function(issue) {
                 // Send the created issue back to the user
+                session.send('All done, here it is');
                 sendIssue(session, issue);
             }).catch(function(err) {
                 if (err.statusCode && err.statusCode === 404) {

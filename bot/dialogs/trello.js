@@ -49,6 +49,7 @@ let claimNextCard = [
 
         if (!results.response) {
             session.send('okay :smile_cat:');
+            session.endDialog();
         } else {
             trelloApi.claimNextCard(card).then(function() {
                 console.log('done');
