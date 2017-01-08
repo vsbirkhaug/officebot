@@ -23,7 +23,6 @@ module.exports = function() {
 
     router.get('/', function(req, res, next) {
         memory.get('config').then(function(config) {
-            console.log(config);
             res.render('index', {
                 config: config
             });

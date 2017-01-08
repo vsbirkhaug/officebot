@@ -6,15 +6,6 @@ $(document).ready(function() {
 
         let form = this.elements;
 
-        /*let config = {
-            botId: form.botId.value,
-            botPass: form.botPass.value,
-            luisModel: form.luisModel.value,
-            ghToken: form.ghToken.value,
-            trelloToken: form.trelloToken.value,
-            trelloKey: form.trelloKey.value
-        };*/
-
         let config = {
             bot: {
                 id: form.botId.value,
