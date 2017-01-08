@@ -74,6 +74,57 @@ let create = [
     }
 ];
 
+// In dev
+let remove = [
+    function(session, args, next) {
+        // Grab the entity
+        let teamName = builder.EntityRecognizer.findEntity('team.name', args.entities);
+
+        let team = session.dialogData.team = {
+            name: teamName ? teamName.entity : null
+        };
+
+        if (!team.name) {
+            builder.Prompts.text(session, 'Which team?');
+        } else {
+            next();
+        }
+    },
+    function(session, results, next) {
+        let teamToDelete = session.dialogData.team;
+        if (results.response) {
+            teamToDelete.name = results.response
+        }
+
+        // teamToDelete.name should be null if the user has cancelled
+        if (teamToDelete.name) {
+            // Grab all of the teams
+            memory.get(teamsKey).then(function(teamsContainer) {
+                // Find the team to delete
+                let index = teamsContainer.teams.findIndex(function(t) {
+                    return t.name === teamsToDelete.name;
+                });
+
+                // Delete it
+                teamsContainer.teams.splice(index, 1);
+
+                // Save the result
+                return memory.store(teamsKey, teamsContainer);
+            }).then(function() {
+                console.log('done');
+                session.send("Okay it's gone now");
+            }).catch(function(err) {
+                console.log(err);
+                session.send("Woops, I think I made a mistake");
+            }).finally(function() {
+                session.endDialog();
+            });
+        } else {
+            session.endDialog('Oh okay');
+        }
+    }
+];
+
 module.exports = {
     index: index,
     create: create

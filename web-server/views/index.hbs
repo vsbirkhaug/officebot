@@ -1,9 +1,40 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Officebot</title>
-    </head>
-    <body>
-        <h1>Officebot</h1>
-    </body>
-</html>
+{{!< default}}
+<main class="wrapper">
+    <header class="header">
+        <section class="container">
+            <h1>Officebot</h1>
+            <p>Your friendly little robot</p>
+        </section>
+    </header>
+    <section class="container" id="config">
+        <h5 class="title">Configuration</h5>
+        <p>
+            From here you can configure some of the external systems that Officebot uses.
+            <strong>If you don't want to use a service, just leave it's details blank.</strong>
+        </p>
+
+        <form id="config-form" method="post" action="/configuration">
+            <fieldset>
+                <label for="botId">Bot ID</label>
+                <input type="text" placeholder="Your bots Microsoft Bot Connector ID" id="botId" value="{{config.botId}}">
+
+                <label for="botPass">Bot Password</label>
+                <input type="password" placeholder="Your bots Microsoft Bot Connector Password" id="botPass" value="{{config.botPass}}">
+
+                <label for="luisModel">LUIS Model URL</label>
+                <input type="text" placeholder="Your LUIS Model URL" id="luisModel" value="{{config.luisModel}}">
+
+                <label for="ghToken">GitHub Access Token</label>
+                <input type="text" placeholder="You can get this from your account settings" id="ghToken" value="{{config.ghToken}}">
+
+                <label for="trelloToken">Trello Token</label>
+                <input type="text" placeholder="Get this from trello dev settings" id="trelloToken" value="{{config.trelloToken}}">
+
+                <label for="trelloKey">Trello Key</label>
+                <input type="password" placeholder="Get this from trello dev settings" id="trelloKey" value="{{config.trelloKey}}">
+
+                <input class="button-primary" type="submit" value="Save">
+            </fieldset>
+        </form>
+    </div>
+</main>
