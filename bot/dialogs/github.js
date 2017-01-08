@@ -62,7 +62,6 @@ let indexIssues = [
 
         // Get the issues
         githubApi.indexIssues(req.repo).then(function(issues) {
-
             // Format the message
             let msg = '';
 

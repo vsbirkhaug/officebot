@@ -8,8 +8,10 @@ module.exports = function() {
     let app = express();
 
     // Parse request bodies
-    app.use(bodyParser.urlencoded({ extended: false }));
-    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.json({
+        inflate: true
+    }));
 
     app.engine('hbs', hbs.express4({}));
     app.set('view engine', 'hbs');
@@ -21,6 +23,7 @@ module.exports = function() {
 
     router.get('/', function(req, res, next) {
         memory.get('config').then(function(config) {
+            console.log(config);
             res.render('index', {
                 config: config
             });
@@ -33,6 +36,7 @@ module.exports = function() {
 
     router.post('/configuration', function(req, res, next) {
         let config = req.body;
+        console.log(config);
 
         memory.store('config', config).then(function() {
             console.log('updated');

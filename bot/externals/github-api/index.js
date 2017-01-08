@@ -12,14 +12,14 @@ let indexIssues = function indexIssues(repoName) {
 
         // Async get the config
         return config.get().then(function(settings) {
-
+            
             // Build and make the request
             let req = {
                 url: baseUri + 'repos/' + repoName + '/issues',
                 headers: {
                     'User-Agent': 'OfficeBot',
                     'Accept': 'application/vnd.github.v3+json',
-                    'Authorization': 'token ' + settings.ghToken,
+                    'Authorization': 'token ' + settings.github.token,
                 },
                 json: true
             };
@@ -56,7 +56,7 @@ let showIssue = function showIssue(repoName, issueId) {
                 headers: {
                     'User-Agent': 'OfficeBot',
                     'Accept': 'application/vnd.github.v3+json',
-                    'Authorization': 'token ' + settings.ghToken,
+                    'Authorization': 'token ' + settings.github.token,
                 },
                 json: true
             };
@@ -98,7 +98,7 @@ let createIssue = function createIssue(repoName, issueTitle) {
                 headers: {
                     'User-Agent': 'OfficeBot',
                     'Accept': 'application/vnd.github.v3+json',
-                    'Authorization': 'token ' + process.env.GH_TOKEN,
+                    'Authorization': 'token ' + settings.github.token,
                 },
                 json: true,
                 body: {

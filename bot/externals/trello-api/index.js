@@ -16,8 +16,8 @@ let getNextItem = function getNextItem() {
                 .template('boards/:boardId/lists')
                 .param('boardId', boardId)
                 .query({
-                    key: settings.trelloKey,
-                    token: settings.trelloToken,
+                    key: settings.trello.key,
+                    token: settings.trello.token,
                     cards: 'open',
                     card_fields: 'name,url'
                 }).toString();
@@ -55,8 +55,8 @@ let getLists = function getListId(listName) {
                 .template('boards/:boardId/lists')
                 .param('boardId', boardId)
                 .query({
-                    key: settings.trelloKey,
-                    token: settings.trelloToken
+                    key: settings.trello.key,
+                    token: settings.trello.token
                 }).toString();
 
             let req = {
@@ -88,32 +88,34 @@ let getLists = function getListId(listName) {
 let moveCardToList = function moveCardToList(cardId, listId) {
     console.log('trello-api.moveCardToList');
 
-    let url = UrlAssembler(baseUri)
-        .template('cards/:cardId/idList')
-        .param('cardId', cardId)
-        .query({
-            value: listId,
-            key: process.env.TRELLO_KEY,
-            token: process.env.TRELLO_TOKEN
-        }).toString();
-    
-    let req = {
-        url: url,
-        json: true
-    };
-
     return new Promise(function(resolve, reject) {
-        request.put(req, function(err, res, body) {
-            if (err) {
-                reject(err);
-            }
+        return new config.get().then(function(settings) {
+            let url = UrlAssembler(baseUri)
+                .template('cards/:cardId/idList')
+                .param('cardId', cardId)
+                .query({
+                    value: listId,
+                    key: settings.trello.key,
+                    token: settings.trello.token
+                }).toString();
+            
+            let req = {
+                url: url,
+                json: true
+            };
 
-            if (res.statusCode === 404) {
-                let notFound = new Error('Not found');
-                reject(notFound);
-            }
+            request.put(req, function(err, res, body) {
+                if (err) {
+                    reject(err);
+                }
 
-            resolve();
+                if (res.statusCode === 404) {
+                    let notFound = new Error('Not found');
+                    reject(notFound);
+                }
+
+                resolve();
+            });
         });
     });
 };

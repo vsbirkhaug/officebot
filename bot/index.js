@@ -9,13 +9,13 @@ function init(config) {
     return new Promise(function(resolve, reject) {
         // Create connector and bot
         let connector = new builder.ChatConnector({
-            appId: config.botId,
-            appPassword: config.botPass,
+            appId: config.bot.id,
+            appPassword: config.bot.pass,
         });
         let bot = new builder.UniversalBot(connector);
 
         // Add LUIS as an intent model
-        let model = config.luisModel;
+        let model = config.bot.luisModel;
         let recognizer = new builder.LuisRecognizer(model);
         let intent = new builder.IntentDialog({recognizers: [recognizer]});
 
