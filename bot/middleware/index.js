@@ -18,7 +18,7 @@ let mentionDetection = function(options) {
 
 let hardReset = function(options) {
     return {
-        botbuilder: function(session) {
+        botbuilder: function(session, next) {
             let trigger = options.phrase;
             // If the bot has a name, take it and use it for better detection
             if (session.privateConversationData.botName) {
@@ -27,6 +27,8 @@ let hardReset = function(options) {
 
             if (session.message.text === trigger) {
                 session.endConversation("Resetting your conversation!");
+            } else {
+                next();
             }
         }
     }

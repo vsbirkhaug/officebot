@@ -19,6 +19,9 @@
 
         <form id="config-form" method="post" action="/configuration">
             <fieldset>
+                <label for="botName">Bot Name</label>
+                <input type="text" placeholder="Your bots name, what you call it when talking to you" id="botName" value="{{config.bot.name}}">
+
                 <label for="botId">Bot ID</label>
                 <input type="text" placeholder="Your bots Microsoft Bot Connector ID" id="botId" value="{{config.bot.id}}">
 

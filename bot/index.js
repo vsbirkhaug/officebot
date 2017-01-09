@@ -7,6 +7,7 @@ let middleware = require('./middleware');
 let server = express();
 
 function init(config) {
+    console.log(config.bot.name);
     return new Promise(function(resolve, reject) {
         // Create connector and bot
         let connector = new builder.ChatConnector({
@@ -19,7 +20,7 @@ function init(config) {
         bot.recognizer(new builder.LuisRecognizer(config.bot.luisModel));
 
         // Middleware
-        bot.use(middleware.mentionDetection({botName: 'officebot'}));
+        bot.use(middleware.mentionDetection({botName: config.bot.name}));
         bot.use(middleware.hardReset({phrase: 'convo reset'}));
         bot.use(builder.Middleware.dialogVersion({version: 0.1}));
         bot.use(builder.Middleware.sendTyping());

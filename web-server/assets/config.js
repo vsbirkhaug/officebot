@@ -8,6 +8,7 @@ $(document).ready(function() {
 
         let config = {
             bot: {
+                name: form.botName.value,
                 id: form.botId.value,
                 pass: form.botPass.value,
                 luisModel: form.luisModel.value
