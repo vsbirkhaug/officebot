@@ -5,32 +5,48 @@ let trello = require('./trello');
 let teams = require('./teams');
 let config = require('../config');
 
+function initDialog(bot, name, action, trigger) {
+    if (trigger) {
+        // User triggered dialog
+        bot.dialog(name, action).triggerAction({
+            matches: trigger
+        }).cancelAction(name + '_cancel', "Okay, I've cancelled that", {
+            matches: /^(cancel|nevermind)/i
+        });
+    } else {
+        // No trigger or cancel, just a dialoge
+        bot.dialog(name, action);
+    }
+}
+
 let init = function init(bot) {
     return new Promise(function(resolve, reject) {
         // General
-        bot.dialog('/not_sure', general.notSure);
-        bot.dialog('/greeting', general.greeting);
-        bot.dialog('/how_to_use', general.help);
-        bot.dialog('/thanks', general.thanks);
-        bot.dialog('/clear_profile', general.clearProfile);
+        bot.dialog('/greeting', general.greeting).triggerAction({matches: 'general.greet'});
+        // Should we still handle None?
+        bot.dialog('/not_sure', general.notSure).triggerAction({matches: 'None'});
+        bot.dialog('/how_to_use', general.help).triggerAction({matches: 'general.help'});
+        bot.dialog('/thanks', general.thanks).triggerAction({matches: 'general.thanks'});
+        bot.dialog('/clear_profile', general.clearProfile).triggerAction({matches: 'profile.clear'});
 
         // Team
-        bot.dialog('/teams_index', teams.index);
-        bot.dialog('/team_create', teams.create);
+        initDialog(bot, '/teams_index', teams.index, 'teams.index');
+        initDialog(bot, '/teams_create', teams.create, 'teams.create');
 
-        config.get().then(function(config) {
+        config.get().then(function(settings) {
             // GitHub
-            bot.dialog('/github_repo_issues_index', github.indexIssues);
-            bot.dialog('/github_repo_issues_show', github.getIssue);
-            bot.dialog('/github_repo_issues_create', github.createIssue);
-
+            if (settings.github.isOn === 'true') {
+                initDialog(bot, '/github_repo_issues_index', github.indexIssues, 'github.repo.issues.index');
+                initDialog(bot, '/github_repo_issues_show', github.getIssue, 'github.repo.issues.show');
+                initDialog(bot, '/github_repo_issues_create', github.createIssue, 'github.repo.issues.create');
+            }
             // Trello
-            bot.dialog('/trello_next_task_view', trello.getNextCard);
-            bot.dialog('/trello_next_task_claim', trello.claimNextCard);
+            if (settings.trello.isOn === 'true') {
+                initDialog(bot, '/trello_next_task_view', trello.getNextCard, 'trello.board.next');
+                initDialog(bot, '/trello_next_task_claim', trello.claimNextCard);
+            }
 
             resolve(bot);
-        }).catch(function(err) {
-            reject(err);
         });
     });
 };

@@ -1,7 +1,9 @@
+let entityRecognizer = require('../entityRecognizer');
+
 let general = {
     notSure: function(session, args) {
         console.log('general.notSure');
-        console.log(args);
+        
         let msg = 'Hmm... Nope. I\'m afraid I didn\'t quite get that!'
                 + ' I\'m still quite new to all this human stuff.';
         session.endDialog(msg);
@@ -9,11 +11,19 @@ let general = {
 
     greeting: function(session) {
         console.log('general.greeting');
-        console.log(session.message.address);
+
         let msg = "Hey there! I'm told I'm performing today, ";
-        msg += " so if you've not seen anything quite like me"
-        msg += " then just ask me what I can do!";
-        session.endDialog(msg);
+                msg += " so if you've not seen anything quite like me"
+                msg += " then just ask me what I can do!";
+
+            session.endDialog(msg);
+
+        /*entityRecognizer.recognize(session, 'github.repo.name').then(function(result) {
+            
+        }).catch(function(err) {
+            console.log(err);
+            session.endDialog('I broke');
+        });*/
     },
 
     help: function(session) {

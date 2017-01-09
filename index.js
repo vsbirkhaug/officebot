@@ -13,7 +13,6 @@ function initialiseBot() {
     return new Promise(function(resolve, reject) {
         // Get the config settings from Redis
         memory.get('config').then(function(config) {
-            //console.log('config:', config);
 
             // If the config doesn't exist in Redis, we'll have undefined here.
             // We still want to be able to run the web service though.
