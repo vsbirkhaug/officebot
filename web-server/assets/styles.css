@@ -1,8 +1,87 @@
+*, *:after, *:before {
+    box-sizing: inherit;
+}
+
 .wrapper {
     display: block;
     overflow: hidden;
     position: relative;
     width: 100%;
+}
+
+.float-right {
+    float: right;
+}
+
+dl, ol, ul {
+    list-style: none;
+    margin-top: 0;
+    padding-left: 0;
+}
+
+.navigation {
+    background: #f4f5f6;
+    border-bottom: .1rem solid #d1d1d1;
+    display: block;
+    height: 5.2rem;
+    left: 0;
+    max-width: 100%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.navigation .container {
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.navigation .navigation-link, .navigation .navigation-title, .navigation .title {
+    display: inline;
+    font-size: 1.6rem;
+    line-height: 5.2rem;
+    padding: 0;
+    text-decoration: none;
+}
+
+.navigation .navigation-title, .navigation .title {
+    font-family: Gotham Rounded A,Gotham Rounded B,Helvetica Neue,Arial,sans-serif;
+    position: relative;
+}
+
+.navigation .navigation-list {
+    list-style: none;
+    margin-bottom: 0;
+    margin-right: 5rem;
+}
+
+.navigation .navigation-item {
+    float: left;
+    margin-bottom: 0;
+    margin-left: 2.5rem;
+    position: relative;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+.octocat {
+    border: 0;
+    color: #f4f5f6;
+    fill: #9b4dca;
+    height: 5.2rem;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 5.2rem;
+    z-index: 1;
+}
+
+.octocat .octocat-arm, .octocat .octocat-body {
+    fill: #f4f5f6;
 }
 
 .header {

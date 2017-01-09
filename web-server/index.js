@@ -13,7 +13,9 @@ module.exports = function() {
         inflate: true
     }));
 
-    app.engine('hbs', hbs.express4({}));
+    app.engine('hbs', hbs.express4({
+        partialsDir: __dirname + '/views/partials'
+    }));
     app.set('view engine', 'hbs');
     app.set('views', __dirname + '/views');
 
@@ -21,19 +23,20 @@ module.exports = function() {
 
     let router = express.Router();
 
-    router.get('/', function(req, res, next) {
+    router.get('/configuration', function(req, res) {
         memory.get('config').then(function(config) {
-            res.render('index', {
-                config: config
+            res.render('configuration', {
+                config: config,
+                siteUrl: 'http://' + req.headers.host + '/'
             });
         }).catch(function(err) {
             console.log('failed to get the config object');
 
-            res.render('index');
+            res.render('configuration');
         });
     });
 
-    router.post('/configuration', function(req, res, next) {
+    router.post('/configuration', function(req, res) {
         let config = req.body;
         console.log(config);
 
@@ -45,6 +48,12 @@ module.exports = function() {
             console.log('failed to update config');
 
             res.sendStatus(500).end();
+        });
+    });
+
+    router.get('/', function(req, res) {
+        res.render('index', {
+            siteUrl: 'http://' + req.headers.host + '/'
         });
     });
 

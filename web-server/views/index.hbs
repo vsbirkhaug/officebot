@@ -1,47 +1,38 @@
 {{!< default}}
 <main class="wrapper">
+    
+    {{> "navigation"}}
+
     <header class="header">
         <section class="container">
-            <h1>Officebot</h1>
+            <h1>Officer</h1>
             <p>
-                Your friendly little robot
+                The NLP Bot Framework
                 <br>
                 <i><small>Currently in Alpha!</small></i>
             </p>
         </section>
     </header>
     <section class="container">
-        <h4>Configuration</h4>
+        <h4>Hi,</h4>
         <p>
-            From here you can configure some of the external systems that Officebot uses.
-            <strong>If you don't want to use a service, just leave it's details blank.</strong>
+            I'm Officer, I specialise in taking and giving orders! Perhaps I could be a good fit for your team?
         </p>
-
-        <form id="config-form" method="post" action="/configuration">
-            <fieldset>
-                <label for="botName">Bot Name</label>
-                <input type="text" placeholder="Your bots name, what you call it when talking to you" id="botName" value="{{config.bot.name}}">
-
-                <label for="botId">Bot ID</label>
-                <input type="text" placeholder="Your bots Microsoft Bot Connector ID" id="botId" value="{{config.bot.id}}">
-
-                <label for="botPass">Bot Password</label>
-                <input type="password" placeholder="Your bots Microsoft Bot Connector Password" id="botPass" value="{{config.bot.pass}}">
-
-                <label for="luisModel">LUIS Model URL</label>
-                <input type="text" placeholder="Your LUIS Model URL" id="luisModel" value="{{config.bot.luisModel}}">
-
-                <label for="ghToken">GitHub Access Token</label>
-                <input type="text" placeholder="You can get this from your account settings" id="ghToken" value="{{config.github.token}}">
-                
-                <label for="trelloToken">Trello Token</label>
-                <input type="text" placeholder="Get this from trello dev settings" id="trelloToken" value="{{config.trello.token}}">
-
-                <label for="trelloKey">Trello Key</label>
-                <input type="password" placeholder="Get this from trello dev settings" id="trelloKey" value="{{config.trello.key}}">
-            
-                <input class="button-primary" type="submit" value="Save">
-                </fieldset>
-        </form>
-    </div>
+    </section>
+    <section class="container">
+        <h4>What am I?</h4>
+        <p>
+            I'm a framework designed for building automation bots using natural language processing (NLP).
+        </p>
+    </section>
+    <section class="container">
+        <h4>Give me a go!</h4>
+        <p>
+            Currently I'm in alpha which means I have limited functionality and I'm really just a "tech demo".
+            But soon you'll be able to build something much like me yourself! In fact, <strong>you already can!</strong>
+        </p>
+        <p>
+            Rather than hiring your next employee, try building one! <a href="https://github.com/bluehatbrit/officebot">Fork me</a> and give it a go.
+        </p>
+    </section>
 </main>
