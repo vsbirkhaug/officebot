@@ -1,6 +1,7 @@
 let MarkdownFormatter = require('../markdown_formatter');
 let builder = require('botbuilder');
 let githubApi = require('../externals/github-api');
+let entityRecognizer = require('../entityRecognizer');
 
 let allowedRepos = [
     'bluehatbrit/officebot',
@@ -31,7 +32,8 @@ let indexIssues = [
         console.log('github.indexIssues');
 
         // Get and format the repo name
-        let repo = builder.EntityRecognizer.findEntity(args.entities, 'github.repo.name');
+        let intent = args.intent;
+        let repo = builder.EntityRecognizer.findEntity(intent.entities, 'github.repo.name');
         let req = session.dialogData.req = {
             repo: repo ? repo.entity : null
         };
@@ -44,24 +46,19 @@ let indexIssues = [
     },
     function(session, result, next) {
         let req = session.dialogData.req;
-        if (result.response) {
-            req.repo = result.response;
-        }
 
-        // BUG: For some reason this doesn't work, seems to be a problem
-        // with the microsoft documentation. Issue submitted to builder repo
-        // https://github.com/Microsoft/BotBuilder/issues/1803
-        if (!req.repo) {
-            // User said cancel
-            session.send('Okay');
-            return session.endDialog();
-        }
-        
-        // LUIS adds spaces around the slash
-        req.repo = req.repo.replace(' / ', '/');
+        // Doesn't really matter if we re-run this right now, remove it later though.
+        entityRecognizer.recognize(session, 'github.repo.name').then(function(result) {
+            if (result.entity) {
+                req.repo = result.entity;
+            }
 
-        // Get the issues
-        githubApi.indexIssues(req.repo).then(function(issues) {
+            // LUIS adds spaces around the slash
+            // Does this still stand?
+            req.repo = req.repo.replace(' / ', '/');
+
+            return githubApi.indexIssues(req.repo);
+        }).then(function(issues) {
             // Format the message
             let msg = '';
 

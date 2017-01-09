@@ -5,6 +5,20 @@ let trello = require('./trello');
 let teams = require('./teams');
 let config = require('../config');
 
+function initDialog(bot, name, action, trigger) {
+    if (trigger) {
+        // User triggered dialog
+        bot.dialog(name, action).triggerAction({
+            matches: trigger
+        }).cancelAction(name + '_cancel', "Okay, I've cancelled that", {
+            matches: /^(cancel|nevermind)/i
+        });
+    } else {
+        // No trigger or cancel, just a dialoge
+        bot.dialog(name, action);
+    }
+}
+
 let init = function init(bot) {
     return new Promise(function(resolve, reject) {
         // General
@@ -16,20 +30,20 @@ let init = function init(bot) {
         bot.dialog('/clear_profile', general.clearProfile).triggerAction({matches: 'profile.clear'});
 
         // Team
-        bot.dialog('/teams_index', teams.index).triggerAction({matches: 'teams.index'});
-        bot.dialog('/team_create', teams.create).triggerAction({matches: 'teams.create'});
+        initDialog(bot, '/teams_index', teams.index, 'teams.index');
+        initDialog(bot, '/teams_create', teams.create, 'teams.create');
 
         config.get().then(function(settings) {
             // GitHub
             if (settings.github.isOn === 'true') {
-                bot.dialog('/github_repo_issues_index', github.indexIssues).triggerAction({matches: 'github.repo.issues.index'});
-                bot.dialog('/github_repo_issues_show', github.getIssue).triggerAction({matches: 'github.repo.issues.show'});
-                bot.dialog('/github_repo_issues_create', github.createIssue).triggerAction({matches: 'github.repo.issues.create'});
+                initDialog(bot, '/github_repo_issues_index', github.indexIssues, 'github.repo.issues.index');
+                initDialog(bot, '/github_repo_issues_show', github.getIssue, 'github.repo.issues.show');
+                initDialog(bot, '/github_repo_issues_create', github.createIssue, 'github.repo.issues.create');
             }
             // Trello
             if (settings.trello.isOn === 'true') {
-                bot.dialog('/trello_next_task_view', trello.getNextCard).triggerAction({matches: 'trello.board.next'});
-                bot.dialog('/trello_next_task_claim', trello.claimNextCard);
+                initDialog(bot, '/trello_next_task_view', trello.getNextCard, 'trello.board.next');
+                initDialog(bot, '/trello_next_task_claim', trello.claimNextCard);
             }
 
             resolve(bot);
