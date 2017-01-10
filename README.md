@@ -21,11 +21,13 @@ The bot has a few prebuild tasks which can be used for todays demo, but of cours
 
 ## Example usage!
 
-* "What's next on trello?"
-* "Create a new team"
-* "Get issues on tryghost/ghost"
-* "Hold on, what was issue 1823 on microsoft/botbuilder again?"
-* "Create an issue on bluehatbrit/office called crashes on db connect"
+**Add @officebot to address the for the first time**
+
+* "@officebot What's next on trello?"
+* "@officebot Create a new team"
+* "@officebot Get issues on tryghost/ghost"
+* "@officebot Hold on, what was issue 1823 on microsoft/botbuilder again?"
+* "@officebot Create an issue on bluehatbrit/office called crashes on db connect"
 
 ## Important notes
 
