@@ -40,8 +40,9 @@ function initialiseBot() {
 
 initialiseBot().then(function(botConnector) {
     // Set the http server to listen
-    return server.listen(80, function() {
-        console.log('Listening on:', 80);
+    let port = process.env.PORT || 80;
+    return server.listen(port, function() {
+        console.log('Listening on:', port);
     });
 }).catch(function(err) {
     console.log(err);
