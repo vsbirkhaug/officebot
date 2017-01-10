@@ -4,7 +4,14 @@ let warp = require('warp10');
 Promise.promisifyAll(redis.RedisClient.prototype);
 Promise.promisifyAll(redis.Multi.prototype);
 
-let client = redis.createClient();
+let client;
+
+// Heroku deploys use an environment variable
+if (process.env.REDIS_URL) {
+    client = redis.createClient(process.env.REDIS_URL);
+} else {
+    client = redis.createClient();
+}
 
 let store = function store(key, obj) {
     let objValue = warp.stringify(obj);
