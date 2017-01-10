@@ -13,17 +13,10 @@ let general = {
         console.log('general.greeting');
 
         let msg = "Hey there! I'm told I'm performing today, ";
-                msg += " so if you've not seen anything quite like me"
-                msg += " then just ask me what I can do!";
+            msg += " so if you've not seen anything quite like me"
+            msg += " then just ask me what I can do!";
 
-            session.endDialog(msg);
-
-        /*entityRecognizer.recognize(session, 'github.repo.name').then(function(result) {
-            
-        }).catch(function(err) {
-            console.log(err);
-            session.endDialog('I broke');
-        });*/
+        session.endDialog(msg);
     },
 
     help: function(session) {

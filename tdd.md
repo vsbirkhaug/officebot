@@ -23,15 +23,21 @@
 
 **Officebot** (working title) is a new breed of automation bot. This project explores with world of ChatOps and how Natural Language Processing (NLP) might be combined with the idea of multi-platform chat-oriented bots to further the field of ChatOps.
 
-The motiviation behind this as a project is to delve deeper into the operations side of software and game engineer, one rarely explored in academics. Automation plays a huge role at top performing companies and can save a business immesurable amounts of time and money.
+The motivation behind this as a project is to delve deeper into the operations side of software and game engineer, one rarely explored in academics. Automation plays a huge role at top performing companies and can save a business immeasurable amounts of time and money.
 
 The Officebot makes use of new emerging technologies and approaches to try and create an ops bot to support software and game engineers in their day-to-day development. The bot comes pre-packaged with a number of capabilities including links to external API's, and also basic team management.
 
-This particular bot is pushing the boundries of the core technologies being used (mostly a JavaScript and Microsoft based stack) and has already resulted in numerous bug reports and feature request to the core repositories. In the further development this project should serve as a way of pushing forward the underlying technologies.
+This particular bot is pushing the boundaries of the core technologies being used (mostly a JavaScript and Microsoft based stack) and has already resulted in numerous bug reports and feature request to the core repositories. In the further development this project should serve as a way of pushing forward the underlying technologies.
+
+### Update 19/12/2016
+
+Officebot has been renamed to "Officer" and has now been morphed fully into a bot building framework under Node.js using JavaScript. It's now bundled with a few demo commands and a configuration portal. This framework is designed to be convention over configuration (like Ruby on Rails as opposed to Sinatra).
+
+Everything else still stands in terms of bot design, but the design principles have now been extracted into a framework for further development.
 
 ## Design and Interaction
 
-The design and interaction of this bot come in multiple layers, since this bot can be deployed to numberous platforms we must take a lot into consideration. Along side this, there are actually two primary interfaces with the bot from a user perspective.
+The design and interaction of this bot come in multiple layers, since this bot can be deployed to numerous platforms we must take a lot into consideration. Along side this, there are actually two primary interfaces with the bot from a user perspective.
 
 * Text based - For example, Slack integration will make this a very popular choice for most users. This is the standard approach to ChatOps / automation bots these days. The twist here is that we include NLP, meaning your standard "command" like structures are out of the window. With NLP we can ask questions back and forth and lower the barrier to entry. No more questions like "how do I deploy?", because the bot can just talk you though it.
 * Speech based - This will be added at the latter end, but with the way the bot will be built we will be able to create a deployable version for the Amazon Echo (see [Technology Stack](#technology-stack)). This will enable the use of speech to control the bot, this gives the user further options of how to interact with the bot, potentially allowing them both avenues. It's also a next level advancement for accessibility by removing the screen-reader and text-to-speech entirely.
@@ -42,17 +48,17 @@ The final consideration is the back-end configuration system. This is a simple w
 
 The design for the back-end configuration will be done with bootstrap, it's fast to develop with and also removes many design decisions such as how to display forms of checkboxes.
 
-## Artifical intelligence
+## Artificial intelligence
 
 One of Officebot's core features is removing the age old "command style" system for making a computer or robot do what you want. Using Natural Language Processing techniques, we are able to infer intents and entities from someones natural speech.
 
-Officebot aims to remove the old "@officebot deploy lybrary/lybrary to prod" and instead replace it with something like "Hey @officebot, send the latest lybrary/lybrary to the horde of customers". From speech like that it can infer the intent to deploy an application, and the entities such as the project, a deployment platform. Using my application I can then identify the occurances of these in the text and process accordingly.
+Officebot aims to remove the old `/deploy lybrary/lybrary to prod` and instead replace it with something like "Hey @officebot, send the latest lybrary/lybrary to the horde of customers". From speech like that it can infer the intent to deploy an application, and the entities such as the project, a deployment platform. Using my application I can then identify the occurrences of these in the text and process accordingly.
 
-For example, if the user said "yo @officebot deploy lybrary/lybrary" we can see that no environment is included. The bot will detect that and ask something like "yeah sure, what environment shall I get it on?" and can then continue the process. This makes the bot much easier to approach, especially as a new employee.
+For example, if the user said `yo @officebot deploy lybrary/lybrary` we can see that no environment is included. The bot will detect that and ask something like "yeah sure, what environment shall I get it on?" and can then continue the process. This makes the bot much easier to approach, especially as a new employee.
 
-For the NLP I've decided to make use of a Microsoft preview product which works well with some of the other tools I've selected. Microsoft's Language Understanding Intelligence Service (LUIS) is a service which can be trained. The training is very important as it allows me to define my own intents, actions, and entities. The bot will then receive all of the user input and attempt to match it to an intent with any entities. Because it receives all user input, it also makes this avalible for training later on, meaning the bot will get better and better over time at identifying language.
+For the NLP I've decided to make use of a Microsoft preview product which works well with some of the other tools I've selected. Microsoft's Language Understanding Intelligence Service (LUIS) is a service which can be trained. The training is very important as it allows me to define my own intents, actions, and entities. The bot will then receive all of the user input and attempt to match it to an intent with any entities. Because it receives all user input, it also makes this available for training later on, meaning the bot will get better and better over time at identifying language.
 
-The NLP can also be trained and re-deployed without having to re-deploy the main bot since it's a microsoft service. This is invaluble as it means the bot can continue to improve without any down time.
+The NLP can also be trained and re-deployed without having to re-deploy the main bot since it's a Microsoft service. This is invaluable as it means the bot can continue to improve without any down time.
 
 ## Coding Standards
 
@@ -60,7 +66,7 @@ This projects ultimate aim is to launch as an open source project to enable othe
 
 * Variable names use `lowerCamelCase`.
 * Const's use `UPPERCASE_UNDERSCORE_NOTATION`.
-* Do not abbreviate variable names, horrizontal space is secondary to understanding. Abbreviations are okay if they are standard such as "num" or "Dns" but in other cases, be explicit.
+* Do not abbreviate variable names, horizontal space is secondary to understanding. Abbreviations are okay if they are standard such as "num" or "Dns" but in other cases, be explicit.
 * All *.js files should end with a new line.
 * Filenames must be all lowercase and may include hyphens `-` with no additional punctuation.
 * Bracers are used for all control statements with the exception of single line statements. IE:
@@ -84,7 +90,7 @@ if (results.response === 5)
 
 ## Technology Stack
 
-* Node.js - Accomodating JavaScript on the serverside, this is my main anchoring platform for the project. The core code is all written in JavaScript and listens like a web server for incomming messages.
+* Node.js - Accommodating JavaScript on the server side, this is my main anchoring platform for the project. The core code is all written in JavaScript and listens like a web server for incoming messages.
 * NPM - Libraries are very important so having a good package manager is also useful, NPM is the standard node.js package manager.
 * Redis - Used for storing persistent data, this may not be the best idea but it's light weight and easy to use. In the future a relational database may be needed but currently we can serialise JSON directly against a key which is working well for things like "teams" and "settings".
 * BotFramework (BotBuilder) - Acting as a base sdk, the BotFramework from Microsoft is giving some core capabilities like sending and receiving messages. This project seems to be stretching it though and may result in feature contributions.
@@ -100,7 +106,7 @@ if (results.response === 5)
     * As a repository backup. If I was working with a team then it would also act as a central place for us to feed from.
     * As a project management tool, making use of Issues, Projects, and Pull Requests I am able to manage my project quickly and effectively.
     * A place to mount the core project maintenance for it's future as an open source project.
-* Travis-CI - Continous integration is vital for all projects. As my technology stack is supported well by linux systems I am able to make use of Travis-CI, a well known CI platform. Travis is also free for open source projects which is a great benefit.
+* Travis-CI - Continuous integration is vital for all projects. As my technology stack is supported well by linux systems I am able to make use of Travis-CI, a well known CI platform. Travis is also free for open source projects which is a great benefit.
 * Azure Web Services - Azure is required for running the bot as it makes use of Microsoft's LUIS. This means you require some service keys from Azure, they are currently free but in the future this sets them up for adding paid systems.
 
 ## Contribution Guideline
@@ -113,7 +119,7 @@ Branching works very simply and feeds from many popular open source projects suc
 
 1. Ensure your master branch is up to date.
 2. Create a branch form master, name it something clearly identifiable in line with the code change intentions.
-3. Work on the branch making automic commits with clear descriptions and as much detail as possible about the change.
+3. Work on the branch making atomic commits with clear descriptions and as much detail as possible about the change.
 4. When the branch is ready for review or discussion or help, issue a pull request back into master using GitHub.
 5. Discussion and iteration takes place using the pull request with new commits taking places and comments being made.
 6. When the changes are approved the pull request is accepted and the the branch is merged into master. The branch is then deleted to keep things tidy.
@@ -130,7 +136,7 @@ The dependency on LUIS is another aspect which is one that is very hard to solve
 
 ## Infrastructure
 
-Due to the nature of the project, infrastructure is fairly upto the user that decides to setup their own bot. The only dependncy currently is the use of Azure to get access keys to LUIS, there is little we can do at this right now. Here is a list of infrastructure currently used.
+Due to the nature of the project, infrastructure is fairly up to the user that decides to setup their own bot. The only dependency currently is the use of Azure to get access keys to LUIS, there is little we can do at this right now. Here is a list of infrastructure currently used.
 
 * Vagrant - Used as a development environment for the officebot, this environment makes it very easy to develop and also allows the tearing down and setting up of a new environment in a minutes should something go wrong.
 * Azure - Currently only used for LUIS keys, this will eventually be used as a demo platform for a hosted version as they offer free hosting for students on a specific computation tier.
@@ -143,7 +149,7 @@ I'd need to add multiple models and train it using knowledge of other languages 
 
 ## Quality Assurance and Testing
 
-I will break down testing / Q&A into two sections, usability testing and functional testing. Both require a different approach and so they should be considered seperately.
+I will break down testing / Q&A into two sections, usability testing and functional testing. Both require a different approach and so they should be considered separately.
 
 ### Functional testing
 
@@ -152,10 +158,10 @@ Functional testing is entirely automated through the use of a testing suite, thi
 * Unit tests to test the base modules of code such as actions taken to create and destroy teams. These unit tests will ensure that the code itself works as expected and will follow a behaviour syntax approach, such as "given X, expect Y". The unit tests will attempt to mirror the structure of the main project in it's layout and will also take on part of the task of code documentation. The unit tests should be clear examples of how functions should be used.
 * Integration tests will be used to simulate higher level functionality from a user perspective. Some may act through the main messaging interface and others may move past it and go straight to the base API. These will test large portions of functionality to ensure the user gets the expected response.
 
-This test suite will use a number of tools, most choices are farily arbitrary and are chosen due to popularity my familiarity with them.
+This test suite will use a number of tools, most choices are fairly arbitrary and are chosen due to popularity my familiarity with them.
 
-* Grunt will act as a task runner and enable the running of all or individual tests from a simple commandline interface.
-* Mocha is the main testing framework, enabling the easy defintion of unit and integration tests. It's a popular tool with many additional plugins. Mocha is also well known for producing very readable tests. As a bonus, there is also a Grunt plugin to make interfacing with Mocha tests easy.
+* Grunt will act as a task runner and enable the running of all or individual tests from a simple command line interface.
+* Mocha is the main testing framework, enabling the easy definition of unit and integration tests. It's a popular tool with many additional plugins. Mocha is also well known for producing very readable tests. As a bonus, there is also a Grunt plugin to make interfacing with Mocha tests easy.
 * Should.js, written by the founder of the Express framework, should is an assertion library which helps to make very readable tests. Assertions can be defined in a friendly way and requires very little learning from someone new to the project. Below is an example of two assertions that can be applied.
 
 ```javascript
